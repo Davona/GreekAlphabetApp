@@ -11,10 +11,10 @@ namespace GreekAlphabetApp
         static void Main(string[] args)
         {
             GreekAlphabet alphabet = new GreekAlphabet();
-            int numberOfLetter = alphabet["delta"];
-            Console.WriteLine(numberOfLetter);
-            string letter = alphabet[3];
-            Console.WriteLine(letter);
+            foreach (var item in alphabet)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

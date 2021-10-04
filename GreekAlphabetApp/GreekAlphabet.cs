@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GreekAlphabetApp
 {
-    class GreekAlphabet
+    class GreekAlphabet: IEnumerable
     {
         private string[] alphabet = new string[]
         { "alpha",
@@ -49,6 +50,12 @@ namespace GreekAlphabetApp
         
         
         }
+
+        public IEnumerator GetEnumerator()
+        {
+            return new Enumerator(alphabet, alphabet.Length);
+        }
+
         public int this[string  key]
         {
             get { return GetIndexOfLetter(key); }
@@ -58,6 +65,29 @@ namespace GreekAlphabetApp
         {
             get { return GetLetter(index); }
            
+        }
+    }
+    class Enumerator : IEnumerator
+    {
+        string[] _collection;
+        int _size;
+        int count = 0;
+        public Enumerator(string [] collection,int size)
+        {
+            _collection = collection;
+            _size = size;
+
+        }
+        public object Current => _collection[count++];
+
+        public bool MoveNext()
+        {
+            return count < _size;
+        }
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
         }
     }
 }
